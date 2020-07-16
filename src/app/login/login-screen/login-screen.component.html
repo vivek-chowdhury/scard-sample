@@ -1,0 +1,53 @@
+<div class="card-container">
+  <div class="card">
+    <div *ngIf="isInvalidUser" class="invalid-user">
+      Invalid User name or Password, please try again !
+    </div>
+    <form class="form-container" [formGroup]="loginGroup">
+      <fieldset class="field-set">
+        <div class="m-1">
+          <label for="username">User Name</label>
+          <div>
+            <input
+              type="text"
+              class="form-contorl form-input"
+              id="username"
+              formControlName="username"
+            />
+          </div>
+        </div>
+
+        <div class="m-1">
+          <label for="password">Password</label>
+          <div>
+            <input
+              type="password"
+              class="form-contorl form-input"
+              id="password"
+              formControlName="password"
+            />
+          </div>
+        </div>
+
+        <div class="m-1">
+          <input
+            type="submit"
+            class="btn btn-primary"
+            value="Login"
+            [disabled]="!loginGroup.valid"
+            (click)="onLoginClicked()"
+          />
+
+          <input
+            type="checkbox"
+            id="rememberMe"
+            class="remember-me"
+            (change)="onRememberMeChanged()"
+            [checked]="rememberMeChecked"
+          />
+          <label for="rememberMe">Remember me</label>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

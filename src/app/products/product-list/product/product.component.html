@@ -1,0 +1,49 @@
+<div class="item-container">
+  <div class="discount">
+    <span class="discount-value" *ngIf="isDiscountRequired"
+      >Discount {{ discount }}%</span
+    >
+  </div>
+  <div class="img-container">
+    <img [src]="productImage" />
+  </div>
+  <div class="description-container">
+    <div class="title">{{ title | uppercase }}</div>
+    <div class="item-description">
+      <span class="description-heading">Brand</span>
+      <div class="item-info brand">
+        <span>{{ brand | uppercase }}</span>
+      </div>
+    </div>
+
+    <div class="item-description">
+      <span class="description-heading">Price</span>
+      <div class="item-info">
+        <span class="mrp-price price"
+          ><s>{{ mrp | currency: "INR" }}</s></span
+        >
+        <span class="final-price price">{{
+          finalPrice | currency: "INR"
+        }}</span>
+      </div>
+    </div>
+
+    <div class="item-description">
+      <span class="description-heading">Rating</span>
+      <div class="item-info">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+      </div>
+    </div>
+
+    <div class="item-description">
+      <span class="description-heading">Color</span>
+      <div class="item-info">
+        <div class="color-box" [style.background-color]="color"></div>
+      </div>
+    </div>
+  </div>
+</div>

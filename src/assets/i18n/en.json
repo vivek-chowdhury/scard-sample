@@ -1,0 +1,6 @@
+{
+  "login.invalid.user.error.message": "Invalid User name or Password, please try again !",
+  "login.user.name.form.field.label": "User Name",
+  "login.password.form.field.label": "Password",
+  "login.remmber.me.form.field.label": "Remember me"
+}
