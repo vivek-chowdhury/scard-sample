@@ -3,7 +3,7 @@ export interface IProduct {
   colour: IColor;
   brand: string;
   discount: number;
-  rating: 4;
+  rating: number;
   image: string;
   price: IPrice;
   title: string;
