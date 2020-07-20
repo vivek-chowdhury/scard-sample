@@ -9,6 +9,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFilterComponent } from './product-filter/product-filter.component';
 import { ProductComponent } from './product-list/product/product.component';
 import { productsReducer } from './state/product.reducers';
+import { CheckboxFilterComponent } from './product-filter/checkbox-filter/checkbox-filter.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { productsReducer } from './state/product.reducers';
     ProductListComponent,
     ProductFilterComponent,
     ProductComponent,
+    CheckboxFilterComponent,
   ],
   imports: [
     SharedModule,
