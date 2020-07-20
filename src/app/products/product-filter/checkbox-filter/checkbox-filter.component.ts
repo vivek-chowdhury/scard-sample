@@ -11,4 +11,15 @@ export class CheckboxFilterComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  /**
+   * @description This method is used for track by modifier
+   *
+   * @param index contains index of element
+   * @param el contains reference of element
+   * @return number
+   */
+  trackByModifier(index: number, el: any): number {
+    return el.id;
+  }
 }

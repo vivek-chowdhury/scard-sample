@@ -4,19 +4,12 @@
   </div>
   <div class="section-filter">
     <div class="filter-card">
-      <div class="filter-option">
-        <input type="checkbox" id="option1" />
-        <label for="option1">Axter</label>
-      </div>
-
-      <div class="filter-option">
-        <input type="checkbox" id="option1" />
-        <label for="option1">Columbus</label>
-      </div>
-
-      <div class="filter-option">
-        <input type="checkbox" id="option1" />
-        <label for="option1">Kwellin</label>
+      <div
+        class="filter-option"
+        *ngFor="let filter of filters; index as i; trackBy: trackByModifier"
+      >
+        <input type="checkbox" />
+        <label for="option1">{{ filter.value }}</label>
       </div>
     </div>
   </div>

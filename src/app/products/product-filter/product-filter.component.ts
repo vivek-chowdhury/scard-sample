@@ -1,3 +1,4 @@
+import { IColor } from './../../shared/interfaces/product';
 import { IFilters, IBrand } from './../../shared/interfaces/filtes';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -15,6 +16,13 @@ export class ProductFilterComponent implements OnInit {
    */
   get brandFilters(): IBrand[] {
     return this.filters.brandFilters;
+  }
+
+  /**
+   * @description
+   */
+  get colourFilters(): IColor[] {
+    return this.filters.colourFilters;
   }
 
   ngOnInit(): void {}
