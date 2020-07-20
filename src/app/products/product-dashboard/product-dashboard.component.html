@@ -3,9 +3,10 @@
     <app-product-filter
       [filters]="filters"
       class="left-section"
+      (selectedFilter)="handleFilterUpdated($event)"
     ></app-product-filter>
     <app-product-list
-      [products]="productList"
+      [products]="filteredProductList"
       class="right-section"
     ></app-product-list>
   </div>

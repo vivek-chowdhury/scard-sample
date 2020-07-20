@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+// import {  } from '@angular/core';
 
 @Component({
   selector: 'app-checkbox-filter',
@@ -8,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CheckboxFilterComponent implements OnInit {
   @Input() sectionTitle: string;
   @Input() filters: [];
+  @Output() filterSelected: EventEmitter<any> = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
@@ -21,5 +23,13 @@ export class CheckboxFilterComponent implements OnInit {
    */
   trackByModifier(index: number, el: any): number {
     return el.id;
+  }
+
+  /**
+   * @description This method is invoked when user selects any filter from the filter list.
+   * @param filter Contain reference of selected filter
+   */
+  handleFilterSelection(filter): void {
+    this.filterSelected.emit(filter);
   }
 }

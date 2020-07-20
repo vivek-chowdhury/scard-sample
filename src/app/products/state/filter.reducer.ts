@@ -11,7 +11,9 @@ export const filterSelector = createSelector(
 
 const initialState: IFilters = {
   brandFilters: [],
+  selectedBrandFilters: [],
   colourFilters: [],
+  selectedColourFilters: [],
   priceFilters: {
     min: 0,
     max: 100,
@@ -91,6 +93,76 @@ function getPriceRange(products) {
 }
 
 /**
+ * @description This function is responsible for modifying filter list and return new state.
+ *
+ * @param state Contains reference of previous state
+ * @param filter Contains reference of selected filter
+ */
+function updateFilterSelection(state, filter) {
+  let modfied;
+  switch (filter.type) {
+    case 'brand':
+      modfied = {
+        ...state,
+        brandFilters: updateFilterOption(state.brandFilters, filter),
+        selectedBrandFilters: updateSelectionList(
+          state.selectedBrandFilters,
+          filter
+        ),
+      };
+      break;
+    case 'colour':
+      modfied = {
+        ...state,
+        colourFilters: updateFilterOption(state.colourFilters, filter),
+        selectedColourFilters: updateSelectionList(
+          state.selectedColourFilters,
+          filter
+        ),
+      };
+      break;
+  }
+  return modfied;
+}
+
+/**
+ * @description This function is responsible for updating selection list.
+ *
+ * @param selectionList Contains list of selected filters
+ * @param filter Contains reference of selected option
+ */
+function updateSelectionList(selectionList, filter) {
+  const list = [...selectionList];
+  let matchIndex = -1;
+  list.forEach((value, index) => {
+    if (value.key === filter.key) {
+      matchIndex = index;
+    }
+  });
+  if (matchIndex > -1) {
+    list.splice(matchIndex, 1);
+  } else {
+    list.push(filter);
+  }
+  return list;
+}
+
+/**
+ * This function is responsible for updating filter options state.
+ * @param filter Contains list of filter
+ * @param option Contains modfied filter
+ */
+function updateFilterOption(filter, option) {
+  const list = [...filter];
+  list.forEach((value, index) => {
+    if (value.key === option.key) {
+      list[index] = { ...option, checked: !option.checked };
+    }
+  });
+  return [...list];
+}
+
+/**
  * @description This function is responsible for returning filter object
  * @param value Contains value
  */
@@ -116,6 +188,8 @@ export function filterReducer(
       };
     case Actions.FilterActionTypes.LoadFiltersFailure:
       return initialState;
+    case Actions.FilterActionTypes.UpdateSelectedFilter:
+      return updateFilterSelection(state, action.option);
     default:
       return state;
   }

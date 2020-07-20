@@ -3,6 +3,8 @@ export interface IFilters {
   brandFilters: IBrand[];
   colourFilters: IColour[];
   priceFilters: IPrice;
+  selectedBrandFilters?: [];
+  selectedColourFilters?: [];
 }
 
 export interface IBrand {

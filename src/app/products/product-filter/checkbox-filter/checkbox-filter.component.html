@@ -7,9 +7,17 @@
       <div
         class="filter-option"
         *ngFor="let filter of filters; index as i; trackBy: trackByModifier"
+        id="{{ filter.key }}"
       >
-        <input type="checkbox" />
-        <label for="option1">{{ filter.value }}</label>
+        <input
+          id="{{ filter.key }}_input"
+          type="checkbox"
+          [value]="filter.value"
+          (change)="handleFilterSelection(filter)"
+        />
+        <label id="{{ filter.key }}_label" for="{{ filter.key }}_input">{{
+          filter.value
+        }}</label>
       </div>
     </div>
   </div>

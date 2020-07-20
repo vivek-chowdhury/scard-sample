@@ -1,4 +1,4 @@
-import { IFilters } from './../../shared/interfaces/filtes';
+import { IFilters, IBrand } from './../../shared/interfaces/filtes';
 import { filterSelector } from './../state/filter.reducer';
 import { SCREENTYPES } from './../../shared/interfaces/header';
 import { IProduct } from './../../shared/interfaces/product';
@@ -23,6 +23,7 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
   productList: IProduct[];
   filters: IFilters;
   isFilterListFetched = false;
+  filteredProductList: IProduct[];
 
   constructor(
     private spinnerManager: SpinnerManagerService,
@@ -70,6 +71,7 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
             this.store.dispatch(new FilterActons.LoadFilters());
           }
           this.filters = state;
+          this.filterProductList();
         }
       });
 
@@ -86,6 +88,97 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
           this.productList = state.products;
         }
       });
+  }
+
+  /**
+   * @description This method is responsible for filtering product list as per current filter selection
+   */
+  filterProductList(): void {
+    let filteredList = [];
+    let isFiltered = false;
+
+    if (this.filters.selectedBrandFilters.length > 0) {
+      filteredList = this.getBrandFilterList(filteredList);
+      isFiltered = true;
+    }
+
+    if (this.filters.selectedColourFilters.length > 0) {
+      filteredList = this.getColurFilterList(filteredList);
+      isFiltered = true;
+    }
+
+    this.filteredProductList = isFiltered ? filteredList : this.productList;
+  }
+
+  /**
+   * @description This method is responsible for filtering product list as per brand filters and returnig filtered list
+   *
+   * @param existingProducts Contains existing filtered list
+   */
+  getBrandFilterList(existingProducts: IProduct[]): IProduct[] {
+    const items = this.productList.filter((product: IProduct) => {
+      return this.isBrandSelected(this.filters.selectedBrandFilters, product);
+    });
+    return this.mergefinalList(items, existingProducts);
+  }
+
+  /**
+   * @description This method is responsible for filtering product list as per colour filters and returnig filtered list
+   *
+   * @param existingProducts Contains existing filtered list
+   */
+  getColurFilterList(existingProducts: IProduct[]): IProduct[] {
+    const items = this.productList.filter((product: IProduct) => {
+      return this.isColourSelected(this.filters.selectedColourFilters, product);
+    });
+    return this.mergefinalList(items, existingProducts);
+  }
+
+  /**
+   * @description This method is responsible for merging new filtered list and existing list of producted
+   *
+   * @param freshItems Contains list of filtered items
+   * @param exisitingItems Contains list of existing filtered items
+   */
+  mergefinalList(
+    freshItems: IProduct[],
+    exisitingItems: IProduct[]
+  ): IProduct[] {
+    return freshItems && freshItems.length > 0
+      ? [...exisitingItems, ...freshItems]
+      : exisitingItems;
+  }
+
+  /**
+   * @description This method is responsible for returning brand object if product brand filter is selected.
+   * @param list Contains list of selected brands
+   * @param product Contains current product from list
+   */
+  isBrandSelected(list: IBrand[], product: IProduct): IBrand {
+    return list.find((brand: IBrand) => {
+      return brand.value === product.brand.toUpperCase();
+    });
+  }
+
+  /**
+   * @description This method is responsible for returning brand object if product Colour filter is selected.
+   * @param list Contains list of selected colours
+   * @param product Contains current product from list
+   */
+  isColourSelected(list: IBrand[], product: IProduct): IBrand {
+    return list.find((colour: IBrand) => {
+      return colour.value === product.colour.title.toUpperCase();
+    });
+  }
+
+  /**
+   * @description This method is invoked when user filter selection is updated. It is
+   * responsible for sending the selection information to reducer for updation.
+   *
+   * @param filter Contains reference of selected filter
+   */
+  handleFilterUpdated(filter): void {
+    this.store.dispatch(new FilterActons.UpdateSelectedFilter(filter));
   }
 
   /**
