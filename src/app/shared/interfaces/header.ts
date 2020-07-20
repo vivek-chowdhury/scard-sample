@@ -1,6 +1,7 @@
 export interface IHeaderState {
   screenType: SCREENTYPES;
   isUserLoggedIn: boolean;
+  userName?: string;
 }
 
 export enum SCREENTYPES {

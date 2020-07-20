@@ -5,31 +5,33 @@
     </div>
     <form class="form-container" [formGroup]="loginGroup">
       <fieldset class="field-set">
-        <div class="m-1">
-          <label for="username">User Name</label>
+        <div class="spacing-bottom">
+          <label for="username">User Name :</label>
           <div>
             <input
               type="text"
-              class="form-contorl form-input"
+              class="form-contorl"
               id="username"
               formControlName="username"
+              placeholder="Enter User id"
             />
           </div>
         </div>
 
-        <div class="m-1">
-          <label for="password">Password</label>
+        <div class="spacing-top spacing-bottom">
+          <label for="password">Password :</label>
           <div>
             <input
               type="password"
-              class="form-contorl form-input"
+              class="form-contorl"
               id="password"
               formControlName="password"
+              placeholder="Enter password"
             />
           </div>
         </div>
 
-        <div class="m-1">
+        <div class="spacing-top">
           <input
             type="submit"
             class="btn btn-primary"

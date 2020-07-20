@@ -1,3 +1,4 @@
+import { SCREENTYPES } from './../../shared/interfaces/header';
 import { IProduct } from './../../shared/interfaces/product';
 import { takeWhile } from 'rxjs/operators';
 import { productListSelector } from './../state/product.reducers';
@@ -7,6 +8,7 @@ import { Store, select } from '@ngrx/store';
 import { IProductState } from '../state/product.reducers';
 
 import * as Actions from './../state/product.actions';
+import * as HeaderAction from './../../core/header/state/header.actions';
 
 @Component({
   selector: 'app-product-dashboard',
@@ -36,6 +38,12 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
    * responsible for initialing form group and other member variables.
    */
   ngOnInit(): void {
+    this.store.dispatch(
+      new HeaderAction.UpdateHeaderButtonState({
+        isUserLoggedIn: true,
+        screenType: SCREENTYPES.PRODUCT_SCREEN,
+      })
+    );
     this.registerStore();
     this.spinnerManager.hideSpinner();
   }

@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 import { IApplicationState } from 'src/app/state/application.state';
 import { loginSelector } from '../state/login.reducer';
 import * as LoginActions from './../state/login.action';
+import * as ApplicationAction from './../../state/application.actions';
 
 @Component({
   selector: 'app-login-screen',
@@ -39,7 +40,7 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-
+    this.store.dispatch(new ApplicationAction.LogoutUser());
     this.registerStore();
     this.spinnerManager.hideSpinner();
   }
@@ -57,6 +58,7 @@ export class LoginScreenComponent implements OnInit, OnDestroy {
       .subscribe((state) => {
         if (state) {
           this.parseValidationResponse(state);
+          this.rememberMeChecked = state.rememberMe;
           this.parseUserDetail(state.user);
         }
       });

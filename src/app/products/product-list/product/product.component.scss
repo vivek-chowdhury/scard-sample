@@ -1,21 +1,26 @@
 img {
   width: 150px;
-  height: 200px;
+  height: auto;
 }
 
 .item-container {
-  //   border: 1px solid #007bff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* border: 1px solid #007bff; */
   width: 200px;
-  height: 400px;
+  height: 380px;
   box-shadow: 1px 4px 9px #888888;
+  margin: 20px;
 }
 
 .img-container {
   text-align: center;
+  min-height: 100px;
 }
 
 .discount {
-  //   height: 30px;
+  /* height: 30px; */
   background-color: red;
   text-align: center;
 }
@@ -31,9 +36,7 @@ img {
   margin: 2px;
   text-align: center;
   padding-bottom: 10px;
-  max-height: 50px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-transform: uppercase;
 }
 .description-heading {
   font-weight: bold;
@@ -75,4 +78,43 @@ img {
   width: 15px;
   height: 15px;
   background-color: red;
+}
+
+.add-to-cart {
+  padding-bottom: 5px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  outline: none;
+}
+
+btn-primary.disabled,
+.btn-primary:disabled {
+  color: #fff;
+  background-color: #007bff75;
+  border-color: #007bff9c;
+  cursor: default;
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 0.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

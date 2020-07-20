@@ -1,3 +1,42 @@
 <nav class="toolbar">
-  <div></div>
+  <div class="left-options">
+    <span class="inline-flex-options">
+      <img
+        src="./../../../assets/image/logo-sample.svg"
+        alt="Logo"
+        class="logo-image"
+      />
+      <label
+        id="user-full-name"
+        *ngIf="isUserLoggedIn"
+        class="align-text left-spacing"
+      >
+        {{ userFullName }}
+      </label>
+    </span>
+  </div>
+  <div class="search-container">
+    <input
+      type="text"
+      name="search"
+      placeholder="Search.."
+      class="input-search"
+      *ngIf="isProductScreen"
+    />
+  </div>
+  <div class="right-options">
+    <span class="inline-flex-options">
+      <span
+        class="header-options option-spacing fa fa-shopping-cart fa-2x"
+        *ngIf="isProductScreen"
+        ><span class="badge">0</span></span
+      >
+
+      <span
+        class="header-options option-spacing fa fa-sign-out fa-2x"
+        (click)="onLogoutClicked()"
+        *ngIf="isUserLoggedIn"
+      ></span>
+    </span>
+  </div>
 </nav>

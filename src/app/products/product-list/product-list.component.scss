@@ -5,15 +5,16 @@
 }
 
 .product-list-container {
-  display: inline-flex;
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
+  min-width: 40%;
   height: 100%;
-  padding: 15px;
+  margin: 10px;
 }
 
 .product {
-  margin-right: 20px;
-  padding: 30px;
+  // margin-right: 20px;
+  // padding: 30px;
 }

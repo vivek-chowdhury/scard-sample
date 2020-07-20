@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: LoginScreenComponent },
+  { path: '', component: LoginScreenComponent, pathMatch: 'full' },
   {
     path: 'products',
     loadChildren: () =>
