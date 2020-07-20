@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CheckboxFilterComponent implements OnInit {
   @Input() sectionTitle: string;
+  @Input() filters: [];
   constructor() {}
 
   ngOnInit(): void {}

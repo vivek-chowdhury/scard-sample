@@ -1,3 +1,5 @@
+import { IFilters } from './../../shared/interfaces/filtes';
+import { filterSelector } from './../state/filter.reducer';
 import { SCREENTYPES } from './../../shared/interfaces/header';
 import { IProduct } from './../../shared/interfaces/product';
 import { takeWhile } from 'rxjs/operators';
@@ -8,6 +10,7 @@ import { Store, select } from '@ngrx/store';
 import { IProductState } from '../state/product.reducers';
 
 import * as Actions from './../state/product.actions';
+import * as FilterActons from './../state/filter.action';
 import * as HeaderAction from './../../core/header/state/header.actions';
 
 @Component({
@@ -18,10 +21,12 @@ import * as HeaderAction from './../../core/header/state/header.actions';
 export class ProductDashboardComponent implements OnInit, OnDestroy {
   componentActive = true;
   productList: IProduct[];
+  filters: IFilters;
+  isFilterListFetched = false;
 
   constructor(
     private spinnerManager: SpinnerManagerService,
-    private store: Store<IProductState>
+    private store: Store<any>
   ) {}
 
   /**
@@ -53,6 +58,21 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
    *  in Login state.
    */
   registerStore(): void {
+    this.store
+      .pipe(
+        select(filterSelector),
+        takeWhile(() => this.componentActive)
+      )
+      .subscribe((state) => {
+        if (state) {
+          if (!this.isFilterListFetched) {
+            this.isFilterListFetched = true;
+            this.store.dispatch(new FilterActons.LoadFilters());
+          }
+          this.filters = state;
+        }
+      });
+
     this.store
       .pipe(
         select(productListSelector),

@@ -1,8 +1,8 @@
 <div class="item-container">
   <div class="discount">
-    <span class="discount-value" *ngIf="isDiscountRequired"
-      >Discount {{ discount }}%</span
-    >
+    <div class="discount-value" *ngIf="isDiscountRequired">
+      Discount {{ discount }}%
+    </div>
   </div>
   <div class="img-container">
     <img [src]="productImage" />

@@ -1,3 +1,4 @@
+import { FilterEffects } from './state/fliter.effects';
 import { ProductEffects } from './state/product.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule } from '@ngrx/store';
@@ -10,6 +11,7 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
 import { ProductComponent } from './product-list/product/product.component';
 import { productsReducer } from './state/product.reducers';
 import { CheckboxFilterComponent } from './product-filter/checkbox-filter/checkbox-filter.component';
+import { filterReducer } from './state/filter.reducer';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { CheckboxFilterComponent } from './product-filter/checkbox-filter/checkb
     SharedModule,
     ProductsRoutingModule,
     StoreModule.forFeature('products', productsReducer),
-    EffectsModule.forFeature([ProductEffects]),
+    StoreModule.forFeature('filters', filterReducer),
+    EffectsModule.forFeature([ProductEffects, FilterEffects]),
   ],
 })
 export class ProductsModule {}

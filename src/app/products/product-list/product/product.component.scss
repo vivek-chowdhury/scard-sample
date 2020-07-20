@@ -1,5 +1,5 @@
 img {
-  width: 150px;
+  width: 120px;
   height: auto;
 }
 
@@ -20,13 +20,15 @@ img {
 }
 
 .discount {
-  /* height: 30px; */
-  background-color: red;
+  height: 25px;
+  width: 100%;
   text-align: center;
 }
 .discount-value {
   color: white;
   font-weight: bold;
+  width: 100%;
+  background-color: red;
 }
 
 .description-container {
