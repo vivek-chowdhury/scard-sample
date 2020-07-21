@@ -86,6 +86,7 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
             this.store.dispatch(new Actions.LoadProducts());
           }
           this.productList = state.products;
+          this.filterProductList();
         }
       });
   }
