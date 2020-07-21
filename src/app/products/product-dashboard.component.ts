@@ -2,16 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { takeWhile } from 'rxjs/operators';
 
-import { filterSelector } from './../state/filter.reducer';
-import { IFilters, IBrand } from './../../shared/interfaces/filtes';
-import { IProduct } from './../../shared/interfaces/product';
-import { SCREENTYPES } from './../../shared/interfaces/header';
-import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
-import { productListSelector } from './../state/product.reducers';
+import { filterSelector } from './state/filter.reducer';
+import { IFilters, IBrand } from './../shared/interfaces/filtes';
+import { IProduct } from './../shared/interfaces/product';
+import { SCREENTYPES } from './../shared/interfaces/header';
+import { SpinnerManagerService } from './../core/spinner/spinner-manager.service';
+import { productListSelector } from './state/product.reducers';
 
-import * as Actions from './../state/product.actions';
-import * as FilterActons from './../state/filter.action';
-import * as HeaderAction from './../../core/header/state/header.actions';
+import * as Actions from './state/product.actions';
+import * as FilterActons from './state/filter.action';
+import * as HeaderAction from './../core/header/state/header.actions';
 
 @Component({
   selector: 'app-product-dashboard',

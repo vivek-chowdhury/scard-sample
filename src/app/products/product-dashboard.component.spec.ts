@@ -1,7 +1,7 @@
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
-import { MockRouter } from './../../../mock/mock-router';
-import { MockActivatedRoute } from './../../../mock/mock-activated-route';
+import { SpinnerManagerService } from './../core/spinner/spinner-manager.service';
+import { MockRouter } from './../../mock/mock-router';
+import { MockActivatedRoute } from './../../mock/mock-activated-route';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
