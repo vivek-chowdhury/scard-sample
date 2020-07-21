@@ -8,6 +8,7 @@
     <app-product-list
       [products]="filteredProductList"
       class="right-section"
+      (addToCart)="handleAddToCartRequest($event)"
     ></app-product-list>
   </div>
 </div>

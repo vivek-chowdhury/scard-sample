@@ -1,5 +1,5 @@
 import { IProduct } from './../../shared/interfaces/product';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-product-list',
@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  @Input()
-  products: IProduct[];
+  @Input() products: IProduct[];
+  @Output() addToCart: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
@@ -23,5 +23,14 @@ export class ProductListComponent implements OnInit {
    */
   trackByModifier(index: number, el: any): number {
     return el.id;
+  }
+
+  /**
+   * @description This method is invoked when user clicks on the Add to Cart button, it
+   * is responsible for notifying Product container about the request.
+   *
+   */
+  handleAddToCartRequest(product: IProduct): void {
+    this.addToCart.emit(product);
   }
 }

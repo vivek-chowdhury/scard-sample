@@ -3,5 +3,6 @@
     *ngFor="let product of products; index as i; trackBy: trackByModifier"
     [product]="product"
     class="product"
+    (addToCart)="handleAddToCartRequest($event)"
   ></app-product>
 </div>

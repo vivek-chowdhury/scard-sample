@@ -5,6 +5,7 @@ export enum ProductActionTypes {
   LoadProducts = '[PRODUCT API] Load list of products from server',
   LoadProductsSuccess = '[PRODUCT API] Product list loaded from server',
   LoadProductsFailed = '[PRODUCT API] Failed to load products',
+  AddProductToCart = '[PRODUCT LIST] Add product to cart',
 }
 
 export class LoadProducts implements Action {
@@ -22,7 +23,13 @@ export class LoadProductsFailed implements Action {
   constructor(public error: any) {}
 }
 
+export class AddProductToCart implements Action {
+  readonly type = ProductActionTypes.AddProductToCart;
+  constructor(public product: IProduct) {}
+}
+
 export type ProductAction =
   | LoadProducts
   | LoadProductsFailed
-  | LoadProductsSuccess;
+  | LoadProductsSuccess
+  | AddProductToCart;

@@ -22,6 +22,7 @@
       placeholder="Search.."
       class="input-search"
       *ngIf="isProductScreen"
+      (keyup)="handleSearchProduct($event)"
     />
   </div>
   <div class="right-options">

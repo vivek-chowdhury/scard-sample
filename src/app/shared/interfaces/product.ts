@@ -1,3 +1,5 @@
+import { IProductFilters } from './filtes';
+
 export interface IProduct {
   id: string;
   colour: IColor;
@@ -20,4 +22,12 @@ export interface IColor {
 export interface IPrice {
   final_price: number;
   mrp?: number;
+}
+
+export interface IProductState {
+  products: IProduct[];
+  selectedProductId: string;
+  filters: IProductFilters[];
+  isListFetched: boolean;
+  error: any;
 }

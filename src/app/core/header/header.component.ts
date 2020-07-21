@@ -1,11 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
+import {
+  takeWhile,
+  filter,
+  map,
+  debounce,
+  distinctUntilChanged,
+  debounceTime,
+} from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { AppBroadcasterService } from './../services/app-broadcaster.service';
 import { headerSector, userSelector } from './state/header.reducer';
 import { SCREENTYPES } from './../../shared/interfaces/header';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +25,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isUserLoggedIn = false;
   currentScreenType = SCREENTYPES.LOGIN_SCREEN;
   userFullName = '';
+
+  searchKey$: Subject<any>;
+
   constructor(
     private store: Store<any>,
     private broadcaster: AppBroadcasterService,
@@ -29,6 +40,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.registerStore();
+    if (!this.searchKey$) {
+      this.searchKey$ = new Subject();
+      this.searchKey$
+        .pipe(
+          map((event) => event.target.value),
+          filter((value) => value.length > 2),
+          debounceTime(200),
+          distinctUntilChanged()
+        )
+        .subscribe((search) => {
+          console.log('User entered search key : ', search);
+        });
+    }
   }
 
   /**
@@ -81,11 +105,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * @description
+   *
+   * @param event Contains reference of event triggered when user type something in Search field.
+   */
+  handleSearchProduct(event): void {
+    this.searchKey$.next(event);
+  }
+
+  /**
    * @description This method will invoked when component is removed from the display list,
    * it is responsible for setting member variable to true which will further unsubscibe any
    * subscription to store.
    */
   ngOnDestroy(): void {
     this.componentActive = false;
+    if (this.searchKey$) {
+      this.searchKey$.unsubscribe();
+    }
   }
 }

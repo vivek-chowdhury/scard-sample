@@ -1,4 +1,3 @@
-import { IProduct } from './product';
 export interface IFilters {
   brandFilters: IBrand[];
   colourFilters: IColour[];
@@ -24,4 +23,9 @@ export interface IPrice {
   max: number;
   step: number;
   selected: number;
+}
+
+export interface IProductFilters {
+  type: string;
+  value: string;
 }

@@ -7,7 +7,7 @@ import { productListSelector } from './../state/product.reducers';
 import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { IProductState } from '../state/product.reducers';
+import { IProductState } from './../../shared/interfaces/product';
 
 import * as Actions from './../state/product.actions';
 import * as FilterActons from './../state/filter.action';
@@ -181,6 +181,14 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
   handleFilterUpdated(filter): void {
     this.store.dispatch(new FilterActons.UpdateSelectedFilter(filter));
   }
+
+  /**
+   * @description This method is invoked when user clicks on the Add to Cart button, it is
+   * responsible for adding selected product to user cart.
+   *
+   * @param product Contains reference of selected product
+   */
+  handleAddToCartRequest(product: IProduct): void {}
 
   /**
    * @description This method will invoked when component is removed from the display list,

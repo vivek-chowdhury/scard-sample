@@ -1,19 +1,6 @@
+import { IProductState } from './../../shared/interfaces/product';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IProduct } from './../../shared/interfaces/product';
 import * as Actions from './product.actions';
-
-export interface IProductState {
-  products: IProduct[];
-  selectedProductId: string;
-  filters: IProductFilters[];
-  isListFetched: boolean;
-  error: any;
-}
-
-export interface IProductFilters {
-  type: string;
-  value: string;
-}
 
 const productFeatureSelector = createFeatureSelector<IProductState>('products');
 export const productListSelector = createSelector(

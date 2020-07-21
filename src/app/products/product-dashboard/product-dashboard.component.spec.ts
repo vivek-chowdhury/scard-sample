@@ -1,4 +1,3 @@
-import { IProductState } from './../state/product.reducers';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
 import { MockRouter } from './../../../mock/mock-router';
