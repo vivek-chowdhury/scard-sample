@@ -24,6 +24,7 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
   filters: IFilters;
   isFilterListFetched = false;
   filteredProductList: IProduct[];
+  searchKey = '';
 
   constructor(
     private spinnerManager: SpinnerManagerService,
@@ -82,8 +83,20 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
       )
       .subscribe((state) => {
         if (state) {
-          if (!state.isListFetched) {
+          if (
+            !state.isListFetched ||
+            (state.searchKey === '' && this.searchKey !== state.searchKey)
+          ) {
+            this.searchKey = '';
             this.store.dispatch(new Actions.LoadProducts());
+          } else if (
+            state.searchKey !== '' &&
+            state.searchKey !== this.searchKey
+          ) {
+            this.searchKey = state.searchKey;
+            this.store.dispatch(
+              new Actions.LoadProductsByTitle(this.searchKey)
+            );
           }
           this.productList = state.products;
           this.filterProductList();

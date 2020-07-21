@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.searchKey$
         .pipe(
           map((event) => event.target.value),
-          filter((value) => value.length > 2),
+          filter((value) => value.length > 2 || value === ''),
           debounceTime(1000),
           distinctUntilChanged()
         )
