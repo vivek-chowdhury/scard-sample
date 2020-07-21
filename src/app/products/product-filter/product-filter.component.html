@@ -2,11 +2,13 @@
   <app-checkbox-filter
     [filters]="brandFilters"
     sectionTitle="Brand"
+    class="filter-section-container"
     (filterSelected)="handleFilterSelection($event)"
   ></app-checkbox-filter>
   <app-checkbox-filter
     sectionTitle="Colour"
     [filters]="colourFilters"
+    class="filter-section-container"
     (filterSelected)="handleFilterSelection($event)"
   ></app-checkbox-filter>
 </div>

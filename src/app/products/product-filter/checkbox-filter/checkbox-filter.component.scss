@@ -9,16 +9,16 @@
 }
 .section-filter {
   width: 100%;
-  //   min-height: 500px;
+  // min-height: 300px;
 }
 
 .filter-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 350px;
+  // min-width: 350px;
   min-height: 100px;
-  max-height: 200px;
+  max-height: 300px;
   line-height: 1rem;
   word-wrap: break-word;
   background-color: #fff;
@@ -35,7 +35,25 @@
 
 label {
   display: inline-block;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+  margin-left: 0.2rem;
+
+  // overflow: hidden;
 }
+
+// .filter-option label input {
+//   visibility: hidden;
+// }
+
+// .filter-option label {
+//   display: block;
+//   position: relative;
+
+// }
+
+// .filter-option label input {
+//   position: absolute;
+//   top: +20px;
+//   visibility: hidden;
+// }
