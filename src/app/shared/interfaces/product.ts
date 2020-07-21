@@ -31,6 +31,7 @@ export interface IProductState {
   isListFetched: boolean;
   error: any;
   cart: ICart[];
+  searchKey: string;
 }
 
 export interface ICart {

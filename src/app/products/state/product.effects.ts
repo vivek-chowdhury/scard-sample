@@ -24,4 +24,16 @@ export class ProductEffects {
       )
     )
   );
+
+  @Effect()
+  filteredProductList$: Observable<Action> = this.action$.pipe(
+    ofType(ProductActions.ProductActionTypes.LoadProductsByTitle),
+    map((action: ProductActions.LoadProductsByTitle) => action.key),
+    mergeMap((key) =>
+      this.productService.getProductByTitle(key).pipe(
+        map((products) => new ProductActions.LoadProductsSuccess(products)),
+        catchError((error) => of(new ProductActions.LoadProductsFailed(error)))
+      )
+    )
+  );
 }

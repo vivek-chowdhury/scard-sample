@@ -30,4 +30,23 @@ export class ProductService extends BaseService {
       })
     );
   }
+
+  /**
+   * @description This method is responsible for fetching list of production by title.
+   *
+   * @return Observable<IProduct[]>
+   */
+  public getProductByTitle(title: string): Observable<IProduct[]> {
+    return this.http
+      .get<IProduct[]>(environment.baseUrl + `/products?title=${title}`)
+      .pipe(
+        tap((data) => console.log('Fetched product list by title !')),
+        map((response) => {
+          return response;
+        }),
+        catchError((error) => {
+          return this.handleError(error);
+        })
+      );
+  }
 }

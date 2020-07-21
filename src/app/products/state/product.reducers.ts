@@ -5,6 +5,7 @@ import {
 } from './../../shared/interfaces/product';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as Actions from './product.actions';
+import * as HeaderActions from './../../core/header/state/header.actions';
 
 const productFeatureSelector = createFeatureSelector<IProductState>('products');
 export const productListSelector = createSelector(
@@ -21,6 +22,7 @@ const initialProductState: IProductState = {
   isListFetched: false,
   error: null,
   cart: [],
+  searchKey: '',
 };
 
 /**
@@ -55,7 +57,7 @@ function updateCartList(state: IProductState, product: IProduct): ICart[] {
  */
 export function productsReducer(
   state: IProductState = initialProductState,
-  action: Actions.ProductAction
+  action: Actions.ProductAction | HeaderActions.HeaderAction
 ): IProductState {
   switch (action.type) {
     case Actions.ProductActionTypes.LoadProductsSuccess:
@@ -64,6 +66,8 @@ export function productsReducer(
       return { ...state, products: [], error: action.error };
     case Actions.ProductActionTypes.AddProductToCart:
       return { ...state, cart: updateCartList(state, action.product) };
+    case HeaderActions.HeaderActionTypes.GetProductByTitle:
+      return { ...state, searchKey: action.key };
   }
   return state;
 }

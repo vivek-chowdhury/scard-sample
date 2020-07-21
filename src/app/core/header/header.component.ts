@@ -16,6 +16,7 @@ import {
   userSelector,
   productSelector,
 } from './state/header.reducer';
+import * as Actions from './state/header.actions';
 import { SCREENTYPES } from './../../shared/interfaces/header';
 
 @Component({
@@ -50,11 +51,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         .pipe(
           map((event) => event.target.value),
           filter((value) => value.length > 2),
-          debounceTime(200),
+          debounceTime(1000),
           distinctUntilChanged()
         )
         .subscribe((search) => {
           console.log('User entered search key : ', search);
+          this.store.dispatch(new Actions.GetProductByTitle(search));
         });
     }
   }

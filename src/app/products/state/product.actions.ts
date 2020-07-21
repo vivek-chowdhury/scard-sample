@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 
 export enum ProductActionTypes {
   LoadProducts = '[PRODUCT API] Load list of products from server',
+  LoadProductsByTitle = '[PRODUCT API] Load list of products by search',
   LoadProductsSuccess = '[PRODUCT API] Product list loaded from server',
   LoadProductsFailed = '[PRODUCT API] Failed to load products',
   AddProductToCart = '[PRODUCT LIST] Add product to cart',
@@ -11,6 +12,11 @@ export enum ProductActionTypes {
 export class LoadProducts implements Action {
   readonly type = ProductActionTypes.LoadProducts;
   constructor() {}
+}
+
+export class LoadProductsByTitle implements Action {
+  readonly type = ProductActionTypes.LoadProductsByTitle;
+  constructor(public key: string) {}
 }
 
 export class LoadProductsSuccess implements Action {
@@ -32,4 +38,5 @@ export type ProductAction =
   | LoadProducts
   | LoadProductsFailed
   | LoadProductsSuccess
-  | AddProductToCart;
+  | AddProductToCart
+  | LoadProductsByTitle;
