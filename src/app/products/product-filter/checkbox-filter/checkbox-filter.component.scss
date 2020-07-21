@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+.check-box-container {
+  height: 100%;
+
+  // display: flex;
+  // flex-direction: column;
+}
 .title {
   min-height: 20px;
 }
@@ -19,6 +25,8 @@
   // min-width: 350px;
   min-height: 100px;
   max-height: 300px;
+  min-height: 300px;
+  width: 100%;
   line-height: 1rem;
   word-wrap: break-word;
   background-color: #fff;
@@ -57,3 +65,10 @@ label {
 //   top: +20px;
 //   visibility: hidden;
 // }
+
+.filter-option label input {
+  // position: relative;
+  // display: none;
+
+  // top: -20px;
+}

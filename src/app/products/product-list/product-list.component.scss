@@ -5,10 +5,10 @@
 }
 
 .product-list-container {
+  position: absolute;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
   min-width: 40%;
   height: 100%;
   margin: 10px;
