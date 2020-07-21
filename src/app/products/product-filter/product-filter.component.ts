@@ -1,6 +1,7 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { IColor } from './../../shared/interfaces/product';
 import { IFilters, IBrand } from './../../shared/interfaces/filtes';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-product-filter',

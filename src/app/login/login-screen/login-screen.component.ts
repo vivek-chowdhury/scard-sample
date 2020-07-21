@@ -1,15 +1,15 @@
-import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
-import { ILoginState } from './../state/login.reducer';
-import { IUser } from './../../shared/interfaces/user';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { takeWhile } from 'rxjs/operators';
 
-import { LoginService } from 'src/app/core/services/login.service';
 import { IApplicationState } from 'src/app/state/application.state';
+import { ILoginState } from './../state/login.reducer';
+import { IUser } from './../../shared/interfaces/user';
 import { loginSelector } from '../state/login.reducer';
+import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
+
 import * as LoginActions from './../state/login.action';
 import * as ApplicationAction from './../../state/application.actions';
 

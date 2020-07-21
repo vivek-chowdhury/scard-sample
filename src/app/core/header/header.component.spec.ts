@@ -13,7 +13,20 @@ describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let store: MockStore;
-  const initialState = { rememberMe: false };
+  const initialState = {
+    login: {
+      user: {
+        username: 'amigo',
+        password: 'delta',
+        fullName: 'Mr. Amigo',
+      },
+      isLoggedIn: true,
+      rememberMe: true,
+    },
+    products: {
+      cart: [],
+    },
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

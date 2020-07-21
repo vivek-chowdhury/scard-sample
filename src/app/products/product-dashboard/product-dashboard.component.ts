@@ -1,13 +1,13 @@
-import { IFilters, IBrand } from './../../shared/interfaces/filtes';
-import { filterSelector } from './../state/filter.reducer';
-import { SCREENTYPES } from './../../shared/interfaces/header';
-import { IProduct } from './../../shared/interfaces/product';
-import { takeWhile } from 'rxjs/operators';
-import { productListSelector } from './../state/product.reducers';
-import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { IProductState } from './../../shared/interfaces/product';
+import { takeWhile } from 'rxjs/operators';
+
+import { filterSelector } from './../state/filter.reducer';
+import { IFilters, IBrand } from './../../shared/interfaces/filtes';
+import { IProduct } from './../../shared/interfaces/product';
+import { SCREENTYPES } from './../../shared/interfaces/header';
+import { SpinnerManagerService } from './../../core/spinner/spinner-manager.service';
+import { productListSelector } from './../state/product.reducers';
 
 import * as Actions from './../state/product.actions';
 import * as FilterActons from './../state/filter.action';
@@ -188,7 +188,9 @@ export class ProductDashboardComponent implements OnInit, OnDestroy {
    *
    * @param product Contains reference of selected product
    */
-  handleAddToCartRequest(product: IProduct): void {}
+  handleAddToCartRequest(product: IProduct): void {
+    this.store.dispatch(new Actions.AddProductToCart(product));
+  }
 
   /**
    * @description This method will invoked when component is removed from the display list,

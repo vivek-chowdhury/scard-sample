@@ -1,4 +1,8 @@
-import { IProductState } from './../../shared/interfaces/product';
+import {
+  IProductState,
+  IProduct,
+  ICart,
+} from './../../shared/interfaces/product';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as Actions from './product.actions';
 
@@ -16,8 +20,39 @@ const initialProductState: IProductState = {
   filters: [],
   isListFetched: false,
   error: null,
+  cart: [],
 };
 
+/**
+ * @description This function is resposible for updating cart list, if product
+ * is already in the cart than it will update the quantity else add product to cart.
+ *
+ * @param state Contains reference of previous state
+ * @param product Contains reference of selected product
+ */
+function updateCartList(state: IProductState, product: IProduct): ICart[] {
+  const cart = [...state.cart];
+  const matchingIndex = cart.findIndex((p: ICart) => {
+    return p.item.id === product.id;
+  });
+
+  if (matchingIndex < 0) {
+    cart.push({ item: product, quantity: 1 });
+  } else {
+    const item = cart[matchingIndex];
+    cart[matchingIndex] = { ...item, quantity: item.quantity + 1 };
+  }
+  return cart;
+}
+
+/**
+ * @description This function is invoked when component request any action and
+ * reduer needs to update state as per the request action. It takes previous state and
+ * return new state as per the action.
+ *
+ * @param state Contain reference of previous state
+ * @param action Contains reference of action
+ */
 export function productsReducer(
   state: IProductState = initialProductState,
   action: Actions.ProductAction
@@ -27,6 +62,8 @@ export function productsReducer(
       return { ...state, products: action.products, isListFetched: true };
     case Actions.ProductActionTypes.LoadProductsFailed:
       return { ...state, products: [], error: action.error };
+    case Actions.ProductActionTypes.AddProductToCart:
+      return { ...state, cart: updateCartList(state, action.product) };
   }
   return state;
 }

@@ -30,7 +30,9 @@
       <span
         class="header-options option-spacing fa fa-shopping-cart fa-2x"
         *ngIf="isProductScreen"
-        ><span class="badge">0</span></span
+        ><span class="badge" *ngIf="totalCartItem">{{
+          totalCartItem
+        }}</span></span
       >
 
       <span

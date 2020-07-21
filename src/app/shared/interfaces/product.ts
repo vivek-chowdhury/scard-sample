@@ -30,4 +30,10 @@ export interface IProductState {
   filters: IProductFilters[];
   isListFetched: boolean;
   error: any;
+  cart: ICart[];
+}
+
+export interface ICart {
+  item: IProduct;
+  quantity: number;
 }

@@ -1,5 +1,6 @@
-import { SpinnerManagerService } from './core/spinner/spinner-manager.service';
 import { Component, OnInit } from '@angular/core';
+
+import { SpinnerManagerService } from './core/spinner/spinner-manager.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

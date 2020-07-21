@@ -1,5 +1,6 @@
-import { IProduct } from './../../shared/interfaces/product';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+
+import { IProduct } from './../../shared/interfaces/product';
 
 @Component({
   selector: 'app-product-list',

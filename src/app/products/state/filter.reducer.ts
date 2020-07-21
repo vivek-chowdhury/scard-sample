@@ -1,4 +1,5 @@
-import { IFilters } from './../../shared/interfaces/filtes';
+import { IProduct } from './../../shared/interfaces/product';
+import { IFilters, IColour } from './../../shared/interfaces/filtes';
 import { Action, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as Actions from './filter.action';
 import * as ProductActions from './product.actions';
@@ -27,7 +28,7 @@ const initialState: IFilters = {
  * @param products Contains list of products
  * @return array
  */
-function getBranchFilter(products) {
+function getBranchFilter(products: IProduct[]) {
   const filter = [];
   const finalFilter = [];
   products.map((product) => {
@@ -45,7 +46,7 @@ function getBranchFilter(products) {
  * @description This function is responsible for retrieving colour filter from avaiable filter list.
  * @param filters Contains list of filters
  */
-function getColorFilters(filters) {
+function getColorFilters(filters: IColour[]) {
   const colourFilterObject = relevantFilterObject(filters, 'COLOUR');
   const filter = colourFilterObject.values;
   const finalList = [];
@@ -71,7 +72,7 @@ function relevantFilterObject(filters, type) {
  * @description This function is responsible for setting price filter initial values.
  * @param  products Contains list of products
  */
-function getPriceRange(products) {
+function getPriceRange(products: IProduct[]) {
   const price = {
     min: 1000000,
     max: 100,

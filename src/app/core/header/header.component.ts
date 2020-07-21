@@ -1,19 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
 import {
   takeWhile,
   filter,
   map,
-  debounce,
   distinctUntilChanged,
   debounceTime,
 } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { Subject } from 'rxjs';
 
 import { AppBroadcasterService } from './../services/app-broadcaster.service';
-import { headerSector, userSelector } from './state/header.reducer';
+import {
+  headerSector,
+  userSelector,
+  productSelector,
+} from './state/header.reducer';
 import { SCREENTYPES } from './../../shared/interfaces/header';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isUserLoggedIn = false;
   currentScreenType = SCREENTYPES.LOGIN_SCREEN;
   userFullName = '';
+  totalCartItem: number;
 
   searchKey$: Subject<any>;
 
@@ -92,6 +96,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe((state) => {
         if (state) {
           this.userFullName = state.user ? state.user.fullName : '';
+        }
+      });
+
+    this.store
+      .pipe(
+        select(productSelector),
+        takeWhile(() => this.componentActive)
+      )
+      .subscribe((state) => {
+        if (state && state.length > 0) {
+          this.totalCartItem = state.length;
+        } else {
+          this.totalCartItem = null;
         }
       });
   }
