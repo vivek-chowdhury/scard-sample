@@ -27,7 +27,6 @@ export interface IPrice {
 export interface IProductState {
   products: IProduct[];
   selectedProductId: string;
-  filters: IProductFilters[];
   isListFetched: boolean;
   error: any;
   cart: ICart[];

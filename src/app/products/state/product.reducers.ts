@@ -18,7 +18,6 @@ export const productListSelector = createSelector(
 const initialProductState: IProductState = {
   products: [],
   selectedProductId: null,
-  filters: [],
   isListFetched: false,
   error: null,
   cart: [],

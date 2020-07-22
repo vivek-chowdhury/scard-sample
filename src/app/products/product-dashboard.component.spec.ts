@@ -1,3 +1,4 @@
+import { MockAppState } from './../../mock/mock.state';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { SpinnerManagerService } from './../core/spinner/spinner-manager.service';
 import { MockRouter } from './../../mock/mock-router';
@@ -38,5 +39,43 @@ describe('ProductDashboardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should contain two section', () => {
+    const leftSection = fixture.debugElement.nativeElement.querySelector(
+      '.left-section'
+    );
+
+    const rightSection = fixture.debugElement.nativeElement.querySelector(
+      '.right-section'
+    );
+    expect(leftSection).toBeDefined();
+    expect(rightSection).toBeDefined();
+  });
+
+  it('should be initialized with default values', () => {
+    expect(component.componentActive).toBeTruthy();
+    expect(component.isFilterListFetched).toBeFalsy();
+    expect(component.searchKey).toBe('');
+    expect(component.productList).toBeUndefined();
+    expect(component.filters).toBeUndefined();
+    expect(component.filters).toBeUndefined();
+    expect(component.filteredProductList).toBeUndefined();
+  });
+
+  it('should update product list', () => {
+    store.setState(MockAppState);
+    store.refreshState();
+    fixture.detectChanges();
+    expect(component.productList).toBeDefined();
+    expect(component.productList.length).toEqual(0);
+  });
+
+  it('should call filter method', () => {
+    const spy = spyOn(component, 'filterProductList').and.callThrough();
+    store.setState(MockAppState);
+    store.refreshState();
+    fixture.detectChanges();
+    expect(component.filterProductList).toHaveBeenCalled();
   });
 });
